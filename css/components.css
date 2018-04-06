@@ -1,0 +1,15 @@
+﻿.tl-radio-tree .el-checkbox
+{
+	display:none;
+}
+
+.tl-tree-dropdown
+{
+	display:inline-block;
+	width:200px;
+}
+
+.tl-tree-dropdown>.el-select
+{
+	display:block;
+}

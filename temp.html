@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<script src="//cdn.bootcss.com/vue/2.5.16/vue.min.js"></script>
+	<script>
+		Vue.component('my-table', { template: '<table><slot /></table>' });
+		window.onload = function ()
+		{
+			new Vue({ el: '#app' });
+		}
+	</script>
+</head>
+<body>
+	<div id="app">
+		<my-table>
+			<tr><td>1</td></tr>
+		</my-table>
+	</div>
+</body>
+</html>

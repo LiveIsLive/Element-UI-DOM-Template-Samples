@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>常用表单控件</title>
+	<link href="plugins/vue/element/index.css" rel="stylesheet" />
+	<link href="css/components.css" rel="stylesheet" />
+	<script src="plugins/jQuery/jquery.min.js"></script>
+	<script src="plugins/vue/vue.min.js"></script>
+	<script src="plugins/vue/element/index.js"></script>
+	<script src="js/components.js"></script>
+	<script>
+		window.onload = function ()
+		{
+			new Vue(
+			{
+				el: '#app',
+				data:
+				{
+					treeValue: 11,
+					treeData:
+					[
+						{
+							id: 1,
+							label: 'A',
+							children:
+							[
+								{ id: 11,label: 'AA' },
+								{ id: 12,label: 'AB' }
+							]
+						},
+						{
+							id: 2,
+							label: 'B',
+							children:
+							[
+								{ id:21,label: 'BA' },
+								{ id:22,label: 'BB' }
+							]
+						}
+					],
+					popoverVisible: false
+				}
+			})
+		}
+	</script>
+</head>
+<body>
+	<div id="app">
+		<div>{{treeValue}}</div>
+		<tl-radio-tree-dropdown v-model="treeValue" :data="treeData" text-property="label" value-property="id"></tl-radio-tree-dropdown>
+
+
+		<!--<tl-radio-tree v-model="treeValue" text-property="name" value-property="id" children-property="villages" :can-check-parent="false" data-source-url="data/towns.json" />-->
+		<!--<tl-radio-tree v-model="treeValue" :data="treeData" text-property="label" value-property="id" :can-check-parent="false" />
+	<tl-check-tree v-model="treeValue" :data="treeData" text-property="label" value-property="id" />-->
+		<tl-list-table>
+			<tr class="el-table__row">
+				<td class="el-table_23_column_96  ">
+					96
+					<div class="cell">
+						2016-05-03
+					</div>
+				</td>
+				<td class="el-table_23_column_97  ">
+					<div class="cell">
+						王小虎
+					</div>
+				</td>
+				<td class="el-table_23_column_98  ">
+					<div class="cell">
+						上海市普陀区金沙江路 1518 弄
+					</div>
+				</td>
+			</tr>
+			<tr class="el-table__row">
+				<td class="el-table_23_column_96  ">
+					<div class="cell">
+						2016-05-02
+					</div>
+				</td>
+				<td class="el-table_23_column_97  ">
+					<div class="cell">
+						王小虎
+					</div>
+				</td>
+				<td class="el-table_23_column_98  ">
+					<div class="cell">
+						上海市普陀区金沙江路 1518 弄
+					</div>
+				</td>
+			</tr>
+			<tr class="el-table__row">
+				<td class="el-table_23_column_96  ">
+					<div class="cell">
+						2016-05-04
+					</div>
+				</td>
+				<td class="el-table_23_column_97  ">
+					<div class="cell">
+						王小虎
+					</div>
+				</td>
+				<td class="el-table_23_column_98  ">
+					<div class="cell">
+						上海市普陀区金沙江路 1518 弄
+					</div>
+				</td>
+			</tr>
+			<tr class="el-table__row">
+				<td class="el-table_23_column_96  ">
+					<div class="cell">
+						2016-05-01
+					</div>
+				</td>
+				<td class="el-table_23_column_97  ">
+					<div class="cell">
+						王小虎
+					</div>
+				</td>
+				<td class="el-table_23_column_98  ">
+					<div class="cell">
+						上海市普陀区金沙江路 1518 弄
+					</div>
+				</td>
+			</tr>
+		</tl-list-table>
+	</div>
+</body>
+</html>

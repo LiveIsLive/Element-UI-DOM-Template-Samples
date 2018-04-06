@@ -304,15 +304,26 @@ Vue.component('tl-check-tree-dropdown', {
 });
 
 Vue.component('tl-list-table', {
-	props: ['value', "data", "textProperty", "valueProperty", "checkStrictly"],
-	data: function ()
+	mounted: function ()
 	{
-		return {
-			searchKey: null
-		}
+		var container = $(this.$el);
+		container.find(">table>thead").addClass(["is-group", "has-gutter"]);
+		container.find(">table>thead>tr>th,table>tbody>tr>td,table>tr>td").addClass("cell");
 	},
-	template: '<div class="el-table el-table--fit el-table--border el-table--enable-row-hover el-table--enable-row-transition">\
-	<table border="0" cellpadding="0" cellspacing="0" class="el-table__body" style="width: 100%;"><slot /></table>\
+	template: '<div class="el-table el-table--border el-table--enable-row-hover">\
+	<table cellpadding="0" cellspacing="0" class="el-table__body" style="width: 100%;"><slot /></table>\
+</div>',
+	methods:
+	{
+	}
+});
+
+Vue.component('tl-edit-table', {
+	created: function ()
+	{
+	},
+	template: '<div class="el-table el-table--border el-table--striped el-table--enable-row-hover">\
+	<table cellpadding="0" cellspacing="0" class="el-table__body" style="width: 100%;"><slot /></table>\
 </div>',
 	methods:
 	{

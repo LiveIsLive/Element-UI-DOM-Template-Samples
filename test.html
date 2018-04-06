@@ -47,18 +47,30 @@
 </head>
 <body>
 	<div id="app">
-		<div>{{treeValue}}</div>
-		<tl-radio-tree-dropdown v-model="treeValue" :data="treeData" text-property="label" value-property="id"></tl-radio-tree-dropdown>
+		<!--<div>{{treeValue}}</div>
+		<tl-radio-tree-dropdown v-model="treeValue" :data="treeData" text-property="label" value-property="id"></tl-radio-tree-dropdown>-->
 		<!--<tl-check-tree-dropdown v-model="treeValue" :data="treeData" text-property="label" value-property="id"></tl-check-tree-dropdown>-->
 
 
 		<!--<tl-radio-tree v-model="treeValue" text-property="name" value-property="id" children-property="villages" :can-check-parent="false" data-source-url="data/towns.json" />-->
 		<!--<tl-radio-tree v-model="treeValue" :data="treeData" text-property="label" value-property="id" :can-check-parent="false" />
 		<tl-check-tree v-model="treeValue" :data="treeData" text-property="label" value-property="id" />-->
-		<tl-list-table>
-			<tr class="el-table__row">
+		<table is="tl-list-table">
+			<thead class="is-group has-gutter">
+				<tr>
+					<th class="cell">
+						2016-05-03
+					</th>
+					<th>
+						王小虎
+					</th>
+					<th>
+						上海市普陀区金沙江路 1518 弄
+					</th>
+				</tr>
+			</thead>
+			<tr>
 				<td class="el-table_23_column_96  ">
-					96
 					<div class="cell">
 						2016-05-03
 					</div>
@@ -91,7 +103,7 @@
 					</div>
 				</td>
 			</tr>
-			<tr class="el-table__row">
+			<tr class="el-table__row--striped">
 				<td class="el-table_23_column_96  ">
 					<div class="cell">
 						2016-05-04
@@ -125,7 +137,7 @@
 					</div>
 				</td>
 			</tr>
-		</tl-list-table>
+		</table>
 	</div>
 </body>
 </html>

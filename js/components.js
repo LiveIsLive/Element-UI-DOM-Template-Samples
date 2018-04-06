@@ -86,7 +86,6 @@ Vue.component('tl-radio-tree', {
 			this.value = node.key;
 			this.$refs.tree.setCheckedKeys([node.key]);
 			this.$emit('input', this.value);
-			this.$emit('change', this.value);
 		},
 		filterNode: function (v, data, node)
 		{
@@ -139,7 +138,11 @@ Vue.component('tl-check-tree', {
 		},
 		value: function (v)
 		{
-			this.$refs.tree.setCheckedKeys(v);
+			//if (v.toString() == this.$refs.tree.getCheckedKeys())
+			//	return;
+			if (this.changedByUser)
+				this.changedByUser = false;
+			else this.$refs.tree.setCheckedKeys(v);
 		}
 	},
 	template: '<div>\
@@ -153,15 +156,15 @@ Vue.component('tl-check-tree', {
 	mounted: function ()
 	{
 		if (this.value)
-			this.$refs.tree.setCheckedKeys(v);
+			this.$refs.tree.setCheckedKeys(this.value, true);
 	},
 	methods:
 	{
 		checkChange: function ()
 		{
+			this.changedByUser = true;
 			this.value = this.$refs.tree.getCheckedKeys();
 			this.$emit('input', this.value);
-			this.$emit('change', this.value);
 		},
 		filterNode: function (v, data)
 		{
@@ -181,10 +184,14 @@ Vue.component('tl-check-tree', {
 		},
 		getCheckedNodes: function ()
 		{
-			var nodes = this.$refs.tree.setCheckedKeys().map(function (key) { return this.$refs.tree.getNode(key) });
+			var nodes = this.$refs.tree.getCheckedKeys().map((function (key) { return this.$refs.tree.getNode(key) }).bind(this));
 			if (this.checkStrictly)
-				return nodes.map(function (n) { return n.isLeaf });
-			return nodes;
+				return nodes;
+			return nodes.filter(function (n) { return n.isLeaf });
+		},
+		setChecked: function (key,checked)
+		{
+			return this.$refs.tree.setChecked(key, checked);
 		}
 	}
 });
@@ -207,6 +214,15 @@ Vue.component('tl-radio-tree-dropdown', {
 			displayName: null
 		}
 	},
+	watch:
+	{
+		value: function (v)
+		{
+			this.displayName = getTreeNodeFullName(this.$refs.tree.getCheckedNode());
+			this.popoverVisible = false;
+			this.$emit('input', this.value);
+		}
+	},
 	mounted: function ()
 	{
 		var node = this.$refs.tree.getCheckedNode();
@@ -215,7 +231,7 @@ Vue.component('tl-radio-tree-dropdown', {
 	},
 	template: '<div class="tl-tree-dropdown">\
 	<el-popover ref="popover" placement="bottom-start" width="100%" trigger="click" v-model="popoverVisible" @show="popover_show">\
-		<tl-radio-tree ref="tree" v-model="value" :data="data" :text-property="textProperty" :value-property="valueProperty" :children-property="childrenProperty" :data-source-url="dataSourceUrl" :can-check-parent="canCheckParent" @change="valueChanged" />\
+		<tl-radio-tree ref="tree" v-model="value" :data="data" :text-property="textProperty" :value-property="valueProperty" :children-property="childrenProperty" :data-source-url="dataSourceUrl" :can-check-parent="canCheckParent" />\
 	</el-popover>\
 	<div class="el-select" @click="popoverVisible=true">\
 		<div class="el-input el-input--suffix" :class="{\'is-focus\':popoverVisible}">\
@@ -225,19 +241,13 @@ Vue.component('tl-radio-tree-dropdown', {
 			</span>\
 		</div>\
 	</div>\
-	<div style="position:absolute;visibility:hidden;margin-top:-10px;margin-left:10px" v-popover:popover></div>\
+	<div style="position:absolute;visibility:hidden"><div style="position:relative"><div style="position:absolute;left:24px;top:-10px" v-popover:popover></div></div></div>\
 </div>',
 	methods:
 	{
-		valueChanged: function (v)
-		{
-			this.displayName = getTreeNodeFullName(this.$refs.tree.getCheckedNode());
-			this.popoverVisible = false;
-			this.$emit('input', this.value);
-		},
 		popover_show: function ()
 		{
-			$("#" + $(this.$el).find(">[aria-describedby]").attr("aria-describedby")).width(this.$el.offsetWidth );
+			$("#" + $(this.$el).find("[aria-describedby]:first").attr("aria-describedby")).width(this.$el.offsetWidth-24);
 		}
 	}
 });
@@ -251,37 +261,44 @@ Vue.component('tl-check-tree-dropdown', {
 			nodes: null
 		}
 	},
+	watch:
+	{
+		value: function (v)
+		{
+			this.nodes = this.$refs.tree.getCheckedNodes();
+			this.$emit('input', this.value);
+		}
+	},
 	mounted: function ()
 	{
 		this.nodes = this.$refs.tree.getCheckedNodes();
-		if (node)
-			this.displayName = getTreeNodeFullName(node);
 	},
-	template: '<div class="tl-tree-dropdown">\
+	template: '<div class="tl-check-tree-dropdown">\
 	<el-popover ref="popover" placement="bottom-start" width="100%" trigger="click" v-model="popoverVisible" @show="popover_show">\
-		<tl-radio-tree ref="tree" v-model="value" :data="data" :text-property="textProperty" :value-property="valueProperty" :children-property="childrenProperty" :data-source-url="dataSourceUrl" :check-strictly="checkStrictly" @change="valueChanged" />\
+		<tl-check-tree ref="tree" v-model="value" :data="data" :text-property="textProperty" :value-property="valueProperty" :children-property="childrenProperty" :data-source-url="dataSourceUrl" :check-strictly="checkStrictly" />\
 	</el-popover>\
 	<div class="el-select" @click="popoverVisible=true">\
 		<div class="el-input el-input--suffix" :class="{\'is-focus\':popoverVisible}">\
-			<div class="el-input__inner">{{displayName}}</div>\
+			<div class="el-input__inner">\
+				<el-tag v-for="node in nodes" closable @close="removeTag(node.key)">{{getTreeNodeFullName(node)}}</el-tag>\
+			</div>\
 			<span class="el-input__suffix">\
 				<i class="el-select__caret el-input__icon el-icon-arrow-up" :class="{\'is-reverse\':popoverVisible}"></i>\
 			</span>\
 		</div>\
 	</div>\
-	<div style="position:absolute;visibility:hidden;margin-top:-10px;margin-left:10px" v-popover:popover></div>\
+	<div style="position:absolute;visibility:hidden"><div style="position:relative"><div style="position:absolute;left:24px;top:-10px" v-popover:popover></div></div></div>\
 </div>',
 	methods:
 	{
-		valueChanged: function (v)
-		{
-			this.displayName = getTreeNodeFullName(this.$refs.tree.getCheckedNode());
-			this.popoverVisible = false;
-			this.$emit('input', this.value);
-		},
 		popover_show: function ()
 		{
-			$("#" + $(this.$el).find(">[aria-describedby]").attr("aria-describedby")).width(this.$el.offsetWidth );
+			$("#" + $(this.$el).find("[aria-describedby]:first").attr("aria-describedby")).width(this.$el.offsetWidth-24 );
+		},
+		removeTag: function (key)
+		{
+			this.$refs.tree.setChecked(key, false);
+			//this.value.splice(this.value.indexOf(key), 1);
 		}
 	}
 });

@@ -17,7 +17,7 @@
 				el: '#app',
 				data:
 				{
-					treeValue: 11,
+					treeValue: [11],
 					treeData:
 					[
 						{
@@ -48,7 +48,8 @@
 <body>
 	<div id="app">
 		<div>{{treeValue}}</div>
-		<tl-radio-tree-dropdown v-model="treeValue" :data="treeData" text-property="label" value-property="id"></tl-radio-tree-dropdown>
+		<tl-check-tree-dropdown v-model="treeValue" :data="treeData" text-property="label" value-property="id"></tl-check-tree-dropdown>
+		<!--<tl-radio-tree-dropdown v-model="treeValue" :data="treeData" text-property="label" value-property="id"></tl-radio-tree-dropdown>-->
 
 
 		<!--<tl-radio-tree v-model="treeValue" text-property="name" value-property="id" children-property="villages" :can-check-parent="false" data-source-url="data/towns.json" />-->

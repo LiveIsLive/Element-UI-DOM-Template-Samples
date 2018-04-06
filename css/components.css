@@ -3,13 +3,24 @@
 	display:none;
 }
 
-.tl-tree-dropdown
+.tl-radio-tree-dropdown
 {
 	display:inline-block;
 	width:200px;
 }
 
-.tl-tree-dropdown>.el-select
+.tl-radio-tree-dropdown>.el-select
 {
 	display:block;
+}
+
+.tl-check-tree-dropdown>.el-select
+{
+	display:block;
+}
+
+.tl-check-tree-dropdown>.el-select>.el-input.el-input--suffix>.el-input__inner
+{
+	min-height:38px;
+	height:auto;
 }

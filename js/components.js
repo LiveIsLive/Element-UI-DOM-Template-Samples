@@ -229,7 +229,7 @@ Vue.component('tl-radio-tree-dropdown', {
 		if (node)
 			this.displayName = getTreeNodeFullName(node);
 	},
-	template: '<div class="tl-tree-dropdown">\
+	template: '<div class="tl-radio-tree-dropdown">\
 	<el-popover ref="popover" placement="bottom-start" width="100%" trigger="click" v-model="popoverVisible" @show="popover_show">\
 		<tl-radio-tree ref="tree" v-model="value" :data="data" :text-property="textProperty" :value-property="valueProperty" :children-property="childrenProperty" :data-source-url="dataSourceUrl" :can-check-parent="canCheckParent" />\
 	</el-popover>\

@@ -8,6 +8,12 @@
 	}
 });
 
+_newControlId = 1;
+function getNewControlId()
+{
+	return _newControlId++;
+}
+
 function getTreeNodeFullName(node)
 {
 	var name = "";
@@ -341,4 +347,40 @@ Vue.component('tl-edit-table', {
 	template: '<div class="el-table el-table--border el-table--striped el-table--enable-row-hover tl-edit-table">\
 	<table cellpadding="0" cellspacing="0" class="el-table__body" style="width: 100%;"><slot /></table>\
 </div>'
+});
+
+Vue.component('tl-link-menu-item', {
+	props: ["url"],
+	template: '<el-menu-item :index="url"><slot /></el-menu-item>'
+});
+
+Vue.component('tl-menu-frame', {
+	props:
+	{
+		asideWidth:{type:[Number,String],default:"200px"}
+	},
+	data: function ()
+	{
+		return {
+			url: null
+		}
+	},
+	mounted: function ()
+	{
+		var menu = $(this.$el).find(".el-menu-item:first");
+		menu.click();
+		for(var subMenu=menu.closest(".el-submenu");subMenu.length;subMenu=subMenu.parent().closest(".el-submenu"))
+			subMenu[0].children[0].click();
+	},
+	template: '<el-container style="height:100%">\
+	<el-aside :width="asideWidth"><el-menu ref="popover" style="height:100%" @select="select"><slot /></el-menu></el-aside>\
+	<el-main><iframe style="width:100%;height:100%" frameborder="0" :src="url" /></el-main>\
+</el-container>',
+	methods:
+	{
+		select: function (linkUrl)
+		{
+			this.url=linkUrl;
+		}
+	}
 });

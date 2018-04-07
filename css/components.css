@@ -24,3 +24,8 @@
 	min-height:38px;
 	height:auto;
 }
+
+.tl-edit-table > table > tbody > tr > td:nth-child(odd), .tl-edit-table > table > tr > td:nth-child(odd)
+{
+	text-align: right;
+}

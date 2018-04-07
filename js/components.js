@@ -312,20 +312,33 @@ Vue.component('tl-list-table', {
 	},
 	template: '<div class="el-table el-table--border el-table--enable-row-hover">\
 	<table cellpadding="0" cellspacing="0" class="el-table__body" style="width: 100%;"><slot /></table>\
-</div>',
-	methods:
-	{
-	}
+</div>'
 });
 
 Vue.component('tl-edit-table', {
-	created: function ()
+	props:
 	{
+		equalWidth: Boolean
 	},
-	template: '<div class="el-table el-table--border el-table--striped el-table--enable-row-hover">\
-	<table cellpadding="0" cellspacing="0" class="el-table__body" style="width: 100%;"><slot /></table>\
-</div>',
-	methods:
+	mounted: function ()
 	{
-	}
+		var container = $(this.$el);
+		container.find("table>tbody>tr:nth-child(odd),table>tr:nth-child(odd)").addClass("el-table__row--striped");
+		container.find(">table>tbody>tr>td,table>tr>td").addClass("cell");
+		if (!this.equalWidth)
+			return;
+
+		var table = this.$el.children[0];
+		var group = $("<colgroup />").insertBefore(table.children[0]);
+		var columnCount = 0;
+		var cells = table.rows[0].cells;
+		for (var i = 0; i < cells.length; i++)
+			columnCount += cells[i].colSpan;
+		var width = 100 / columnCount + "%";
+		for (var i = 0; i < columnCount; i++)
+			group.append($("<col />").css("width", width));
+	},
+	template: '<div class="el-table el-table--border el-table--striped el-table--enable-row-hover tl-edit-table">\
+	<table cellpadding="0" cellspacing="0" class="el-table__body" style="width: 100%;"><slot /></table>\
+</div>'
 });

@@ -48,15 +48,13 @@
 <body>
 	<div id="app">
 		<!--<div>{{treeValue}}</div>
-		<tl-radio-tree-dropdown v-model="treeValue" :data="treeData" text-property="label" value-property="id"></tl-radio-tree-dropdown>-->
+	<tl-radio-tree-dropdown v-model="treeValue" :data="treeData" text-property="label" value-property="id"></tl-radio-tree-dropdown>-->
 		<!--<tl-check-tree-dropdown v-model="treeValue" :data="treeData" text-property="label" value-property="id"></tl-check-tree-dropdown>-->
-
-
 		<!--<tl-radio-tree v-model="treeValue" text-property="name" value-property="id" children-property="villages" :can-check-parent="false" data-source-url="data/towns.json" />-->
 		<!--<tl-radio-tree v-model="treeValue" :data="treeData" text-property="label" value-property="id" :can-check-parent="false" />
-		<tl-check-tree v-model="treeValue" :data="treeData" text-property="label" value-property="id" />-->
+	<tl-check-tree v-model="treeValue" :data="treeData" text-property="label" value-property="id" />-->
 		<table is="tl-list-table">
-			<thead class="is-group has-gutter">
+			<thead>
 				<tr>
 					<th class="cell">
 						2016-05-03
@@ -70,71 +68,106 @@
 				</tr>
 			</thead>
 			<tr>
-				<td class="el-table_23_column_96  ">
-					<div class="cell">
+				<td>
+					2016-05-03
+				</td>
+				<td>
+					王小虎
+				</td>
+				<td>
+					上海市普陀区金沙江路 1518 弄
+				</td>
+			</tr>
+			<tr>
+				<td>
+					2016-05-02
+				</td>
+				<td>
+					王小虎
+				</td>
+				<td>
+					上海市普陀区金沙江路 1518 弄
+				</td>
+			</tr>
+			<tr>
+				<td>
+					2016-05-04
+				</td>
+				<td>
+					王小虎
+				</td>
+				<td>
+					上海市普陀区金沙江路 1518 弄
+				</td>
+			</tr>
+			<tr>
+				<td>
+					2016-05-01
+				</td>
+				<td>
+					王小虎
+				</td>
+				<td>
+					上海市普陀区金沙江路 1518 弄
+				</td>
+			</tr>
+		</table>
+		<table is="tl-edit-table" equal-width>
+			<thead>
+				<tr>
+					<th class="cell">
 						2016-05-03
-					</div>
-				</td>
-				<td class="el-table_23_column_97  ">
-					<div class="cell">
+					</th>
+					<th>
 						王小虎
-					</div>
-				</td>
-				<td class="el-table_23_column_98  ">
-					<div class="cell">
+					</th>
+					<th>
 						上海市普陀区金沙江路 1518 弄
-					</div>
+					</th>
+				</tr>
+			</thead>
+			<tr>
+				<td>
+					2016-05-03
+				</td>
+				<td>
+					王小虎
+				</td>
+				<td>
+					上海市普陀区金沙江路 1518 弄
 				</td>
 			</tr>
-			<tr class="el-table__row">
-				<td class="el-table_23_column_96  ">
-					<div class="cell">
-						2016-05-02
-					</div>
+			<tr>
+				<td>
+					2016-05-02
 				</td>
-				<td class="el-table_23_column_97  ">
-					<div class="cell">
-						王小虎
-					</div>
+				<td>
+					王小虎
 				</td>
-				<td class="el-table_23_column_98  ">
-					<div class="cell">
-						上海市普陀区金沙江路 1518 弄
-					</div>
+				<td>
+					上海市普陀区金沙江路 1518 弄
 				</td>
 			</tr>
-			<tr class="el-table__row--striped">
-				<td class="el-table_23_column_96  ">
-					<div class="cell">
-						2016-05-04
-					</div>
+			<tr>
+				<td>
+					2016-05-04
 				</td>
-				<td class="el-table_23_column_97  ">
-					<div class="cell">
-						王小虎
-					</div>
+				<td>
+					王小虎
 				</td>
-				<td class="el-table_23_column_98  ">
-					<div class="cell">
-						上海市普陀区金沙江路 1518 弄
-					</div>
+				<td>
+					上海市普陀区金沙江路 1518 弄
 				</td>
 			</tr>
-			<tr class="el-table__row">
-				<td class="el-table_23_column_96  ">
-					<div class="cell">
-						2016-05-01
-					</div>
+			<tr>
+				<td>
+					2016-05-01
 				</td>
-				<td class="el-table_23_column_97  ">
-					<div class="cell">
-						王小虎
-					</div>
+				<td>
+					王小虎
 				</td>
-				<td class="el-table_23_column_98  ">
-					<div class="cell">
-						上海市普陀区金沙江路 1518 弄
-					</div>
+				<td>
+					上海市普陀区金沙江路 1518 弄
 				</td>
 			</tr>
 		</table>

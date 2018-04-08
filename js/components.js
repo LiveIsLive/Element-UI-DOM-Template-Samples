@@ -387,7 +387,7 @@ Vue.component('tl-menu-frame', {
 
 Vue.component('tl-link-tab-pane', {
 	props: ["url","label"],
-	template: '<el-tab-pane :label="label" :name="url" />',
+	template: '<el-tab-pane :label="label" :name="url">111</el-tab-pane>',
 	methods:
 	{
 		addPanes: function (pane)
@@ -429,16 +429,40 @@ Vue.component('tl-tab-frame', {
 			return this.panes.push(pane);
 		}
 	}
-});;
+});
 
 Vue.component('tl-tab-pane', {
 	props: ["label", "disabled","name"],
-	template: '<el-tab-pane :label="label" :name="url" />',
+	template: '<el-tab-pane :label="label" :name="name" :disabled="disabled"><slot /></el-tab-pane>',
 	methods:
 	{
 		addPanes: function (pane)
 		{
 			return this.$parent.$parent.addPanes(pane);
+		}
+	}
+});
+
+Vue.component('tl-tabs', {
+	props: ["value"],
+	data: function ()
+	{
+		return {
+			panes: []
+		}
+	},
+	template: '<el-tabs v-model="value" type="border-card" @tab-click="tab_click" v-model="url">\
+	<el-tab-pane v-for="pane in panes" :label="pane.label" :name="pane.name" />\
+</el-tabs>',
+	methods:
+	{
+		tab_click: function (tab)
+		{
+			this.$emit('tab-click', this.value);
+		},
+		addPanes: function (pane)
+		{
+			return this.panes.push(pane);
 		}
 	}
 });

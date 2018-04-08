@@ -384,3 +384,61 @@ Vue.component('tl-menu-frame', {
 		}
 	}
 });
+
+Vue.component('tl-link-tab-pane', {
+	props: ["url","label"],
+	template: '<el-tab-pane :label="label" :name="url" />',
+	methods:
+	{
+		addPanes: function (pane)
+		{
+			return this.$parent.$parent.addPanes(pane);
+		}
+	}
+});
+
+Vue.component('tl-tab-frame', {
+	data: function ()
+	{
+		return {
+			url: null,
+			panes:[]
+		}
+	},
+	mounted: function ()
+	{
+		if (!this.url || this.url=="0")
+			this.url = this.panes[0].name;
+	},
+	template: '<el-container style="height:100%"><slot />\
+	<el-header height="40px" style="padding:0;overflow:hidden"><el-tabs type="border-card" @tab-click="tab_click" v-model="url"><el-tab-pane v-for="pane in panes" :label="pane.label" :name="pane.name" /></el-tabs></el-header>\
+	<el-main style="padding:0">\
+		<div class="el-tabs el-tabs--top el-tabs--border-card" style="border-top:0;height:100%;box-sizing:border-box">\
+			<div class="el-tabs__content" style="padding:0;height:100%"><iframe style="width:100%;height:100%" frameborder="0" :src="url" /></div>\
+		</div>\
+	</el-main>\
+</el-container>',
+	methods:
+	{
+		tab_click: function (tab)
+		{
+			this.url = tab.name;
+		},
+		addPanes: function (pane)
+		{
+			return this.panes.push(pane);
+		}
+	}
+});;
+
+Vue.component('tl-tab-pane', {
+	props: ["label", "disabled","name"],
+	template: '<el-tab-pane :label="label" :name="url" />',
+	methods:
+	{
+		addPanes: function (pane)
+		{
+			return this.$parent.$parent.addPanes(pane);
+		}
+	}
+});

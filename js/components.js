@@ -474,3 +474,21 @@ Vue.component('tl-tabs', {
 		}
 	}
 });
+
+Vue.component('tl-op-bar', {
+	data: function ()
+	{
+		return {
+			popoverVisible: null
+		}
+	},
+	template: '<span><el-popover ref="popover1" width="auto" trigger="hover" :visible-arrow="false" popper-class="tl-op-bar-popover"><slot /></el-popover>\
+<el-button type="text" icon="el-icon-edit-outline" style="color:black" v-popover:popover1>操作</el-button></span>',
+	methods:
+	{
+		addPanes: function (pane)
+		{
+			return this.$parent.$parent.addPanes(pane);
+		}
+	}
+});

@@ -47,28 +47,30 @@
 </head>
 <body>
 	<div id="app">
-		<tl-tabs>
-			<tl-tab-pane label="Google" name="GG">Google</tl-tab-pane>
-			<tl-tab-pane label="Bing" name="BB">Bing</tl-tab-pane>
-		</tl-tabs>
+		<tl-op-bar>
+			<el-button type="primary">编辑</el-button>
+			<el-button type="danger">删除</el-button>
+		</tl-op-bar>
+		<!--<tl-tabs>
+		<tl-tab-pane label="Google" name="GG">Google</tl-tab-pane>
+		<tl-tab-pane label="Bing" name="BB">Bing</tl-tab-pane>
+	</tl-tabs>-->
 		<!--<tl-tab-frame>
-			<tl-link-tab-pane label="Google" url="http://g.cn"></tl-link-tab-pane>
-			<tl-link-tab-pane label="Bing" url="http://bing.com"></tl-link-tab-pane>
-			<tl-link-tab-pane label="Blank" url="about:blank"></tl-link-tab-pane>
-		</tl-tab-frame>-->
-
+		<tl-link-tab-pane label="Google" url="http://g.cn"></tl-link-tab-pane>
+		<tl-link-tab-pane label="Bing" url="http://bing.com"></tl-link-tab-pane>
+		<tl-link-tab-pane label="Blank" url="about:blank"></tl-link-tab-pane>
+	</tl-tab-frame>-->
 		<!--<tl-menu-frame>
-			<el-submenu index="国内">
-				<template slot="title">
-					国内
-				</template>
-				<tl-link-menu-item url="http://baidu.com">百度</tl-link-menu-item>
-				<tl-link-menu-item url="http://so.com">360</tl-link-menu-item>
-			</el-submenu>
-			<tl-link-menu-item url="http://g.cn">Google</tl-link-menu-item>
-			<tl-link-menu-item url="http://bing.com">Bing</tl-link-menu-item>
-		</tl-menu-frame>-->
-
+		<el-submenu index="国内">
+			<template slot="title">
+				国内
+			</template>
+			<tl-link-menu-item url="http://baidu.com">百度</tl-link-menu-item>
+			<tl-link-menu-item url="http://so.com">360</tl-link-menu-item>
+		</el-submenu>
+		<tl-link-menu-item url="http://g.cn">Google</tl-link-menu-item>
+		<tl-link-menu-item url="http://bing.com">Bing</tl-link-menu-item>
+	</tl-menu-frame>-->
 		<!--<div>{{treeValue}}</div>
 	<tl-radio-tree-dropdown v-model="treeValue" :data="treeData" text-property="label" value-property="id"></tl-radio-tree-dropdown>-->
 		<!--<tl-check-tree-dropdown v-model="treeValue" :data="treeData" text-property="label" value-property="id"></tl-check-tree-dropdown>-->

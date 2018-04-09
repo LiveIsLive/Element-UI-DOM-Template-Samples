@@ -329,7 +329,7 @@ Vue.component('tl-edit-table', {
 	mounted: function ()
 	{
 		var container = $(this.$el);
-		container.find("table>tbody>tr:nth-child(odd),table>tr:nth-child(odd)").addClass("el-table__row--striped");
+		container.find(">table>tbody>tr:nth-child(odd),>table>tr:nth-child(odd)").addClass("el-table__row--striped");
 		container.find(">table>tbody>tr>td,table>tr>td").addClass("cell");
 		if (!this.equalWidth)
 			return;
@@ -451,13 +451,21 @@ Vue.component('tl-tabs', {
 			panes: []
 		}
 	},
-	template: '<el-tabs v-model="value" type="border-card" @tab-click="tab_click" v-model="url">\
-	<el-tab-pane v-for="pane in panes" :label="pane.label" :name="pane.name" />\
+	mounted: function ()
+	{
+		if (!this.value || this.value == "0")
+			this.value = this.panes[0].name;
+		this.tab_click();
+	},
+	template: '<el-tabs class="tl-tabs" v-model="value" type="border-card" @tab-click="tab_click" v-model="value"><slot />\
+	<el-tab-pane v-for="pane in panes" :label="pane.label" :name="pane.name"><component :is="pane.$slots.default"></component></el-tab>\
 </el-tabs>',
 	methods:
 	{
-		tab_click: function (tab)
+		tab_click: function (pane)
 		{
+			$(this.$el).find(">.el-tabs__content>.el-tab-pane").css("display", "none");
+			window.document.getElementById("pane-" + this.value).style.display = "";
 			this.$emit('tab-click', this.value);
 		},
 		addPanes: function (pane)

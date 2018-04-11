@@ -15,10 +15,8 @@
 			new Vue({
 				el: '#app',
 				data: {
-					basicDatePickerValue: null,
-					basicMonthPickerValue: null,
-					basicDateTimePickerValue: null,
-					basicYearPickerValue: null
+					tempValues: { checkboxValues:[]},
+					towns: [{ id: 1, name: "大良" }, { id: 2, name: "容桂" }],
 				}
 			})
 		}
@@ -34,7 +32,7 @@
 			</tr>
 			<tr>
 				<td>confirmMsg(msg,okFun,cancelFun)提示</td>
-				<td><el-button @click="confirmMsg('这是一个confirm？',function(){window.alert('处理……')})">测试</el-button></td>
+				<td><el-button @click="confirmMsg('这是一个confirm？',function(){window.alert('点击确定')},function(){window.alert('点击取消')})">测试</el-button></td>
 			</tr>
 			<tr>
 				<td>文本框</td>
@@ -43,10 +41,63 @@
 			<tr>
 				<td>日期和时间选择</td>
 				<td>
-					<tl-date-picker v-model="basicDatePickerValue"></tl-date-picker>
+					<tl-date-picker></tl-date-picker>
 					<tl-month-picker></tl-month-picker>
 					<tl-date-time-picker></tl-date-time-picker>
 					<tl-year-picker></tl-year-picker>
+				</td>
+			</tr>
+			<tr>
+				<td>下拉列表</td>
+				<td>
+					原生：
+					<el-select placeholder="" v-model="tempValues.selectValue">
+						<el-option v-for="item in towns" :key="item.id" :label="item.name" :value="item.id"></el-option>
+					</el-select>
+					封装通过数据字典加载：
+					<tl-select :data="towns" text-property="name" value-property="id"></tl-select>
+				</td>
+			</tr>
+			<tr>
+				<td>数字输入：</td>
+				<td>
+					<tl-input-number v-model="tempValues.numberInputValue" controls-position="right" />
+				</td>
+			</tr>
+			<tr>
+				<td>复选框</td>
+				<td>
+					<p>
+						单个：
+						<el-checkbox>备选项</el-checkbox>
+					</p>
+					<p>
+						多个：
+						<el-checkbox-group v-model="tempValues.checkboxValues">
+							<el-checkbox label="复选框 A"></el-checkbox>
+							<el-checkbox label="复选框 B"></el-checkbox>
+							<el-checkbox label="复选框 C"></el-checkbox>
+							<el-checkbox label="禁用" disabled></el-checkbox>
+						</el-checkbox-group>
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>单选框</td>
+				<td>
+					<el-radio-group v-model="tempValues.radioValues">
+						<el-radio :label="3">备选项</el-radio>
+						<el-radio :label="6">备选项</el-radio>
+						<el-radio :label="9">备选项</el-radio>
+					</el-radio-group>
+				</td>
+			</tr>
+			<tr>
+				<td>上传：</td>
+				<td>
+					<el-upload action="https://jsonplaceholder.typicode.com/posts/">
+						<el-button size="small" type="primary">点击上传</el-button>
+					</el-upload>
 				</td>
 			</tr>
 		</table>

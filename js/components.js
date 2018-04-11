@@ -421,6 +421,18 @@ Vue.component('tl-year-picker', {
 	}
 });
 
+Vue.component('tl-select', {
+	props: ['value', "data", "textProperty", "valueProperty"],
+	template: '<el-select v-model="value">\
+	<el-option v-for="item in data" :key="item[valueProperty]" :label="item[textProperty]" :value="item[valueProperty]" />\
+  </el-select>'
+});
+
+Vue.component('tl-input-number', {
+	props: ['value'],
+	template: '<el-input-number v-model="value" controls-position="right" />'
+});
+
 Vue.component('tl-list-table', {
 	mounted: function ()
 	{

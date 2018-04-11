@@ -1,12 +1,30 @@
-﻿Vue.component('runoob', {
-	template: '<h1 v-bind:style={color:this.color}>自定{{ color }}义组件!<slot /></h1>',
-	data: function ()
-	{
-		return {
-			color: "red"
-		}
-	}
-});
+﻿function alertMsg(message, callback, title)
+{
+	if (!title)
+		title = "系统提示";
+	Vue.prototype.$alert(message, title, { type: 'info',callback: callback})
+}
+
+function confirmMsg(message, confirmCallback, cancelCallback, title)
+{
+	if (!title)
+		title = "系统提示";
+	Vue.prototype.$confirm(message, title,
+		{
+			type: 'info',
+			callback: function (action)
+			{
+				if (action == "confirm")
+				{
+					if (confirmCallback)
+						confirmCallback();
+					return;
+				}
+				if (cancelCallback)
+					cancelCallback();
+			}
+		})
+}
 
 _newControlId = 1;
 function getNewControlId()
@@ -482,13 +500,36 @@ Vue.component('tl-op-bar', {
 			popoverVisible: null
 		}
 	},
-	template: '<span><el-popover ref="popover1" width="auto" trigger="hover" :visible-arrow="false" popper-class="tl-op-bar-popover"><slot /></el-popover>\
-<el-button type="text" icon="el-icon-edit-outline" style="color:black" v-popover:popover1>操作</el-button></span>',
+	template: '<span><el-popover ref="popover" width="auto" trigger="hover" :visible-arrow="false" popper-class="tl-op-bar-popover"><slot /></el-popover>\
+<el-button type="text" icon="el-icon-edit-outline" style="color:black" v-popover:popover>操作</el-button></span>',
 	methods:
 	{
 		addPanes: function (pane)
 		{
 			return this.$parent.$parent.addPanes(pane);
+		}
+	}
+});
+
+Vue.component('tl-search-bar', {
+	template: '<div><slot /></div>'
+});
+
+Vue.component('tl-search-item', {
+	template: '<span style="margin-right:15px"><slot /></span>'
+});
+
+Vue.component('tl-tool-bar', {
+	template: '<div style="margin-top:10px"><slot /></div>'
+});
+
+Vue.component('tl-tool-button', {
+	template: '<el-button size="small" type="success" @click="click"><slot /></el-button>',
+	methods:
+	{
+		click: function (e)
+		{
+			return this.$emit('click', e);;
 		}
 	}
 });

@@ -1,24 +1,54 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <title>常用表单控件</title>
+	<meta charset="utf-8" />
+	<title>常用表单控件</title>
 	<link href="plugins/vue/element/index.css" rel="stylesheet" />
+	<link href="css/components.css" rel="stylesheet" />
+	<script src="plugins/jQuery/jquery.min.js"></script>
 	<script src="plugins/vue/vue.min.js"></script>
 	<script src="plugins/vue/element/index.js"></script>
+	<script src="js/components.js"></script>
 	<script>
 		window.onload = function ()
 		{
 			new Vue({
 				el: '#app',
 				data: {
-					message: 'Hello Vue.js!'
+					basicDatePickerValue: null,
+					basicMonthPickerValue: null,
+					basicDateTimePickerValue: null,
+					basicYearPickerValue: null
 				}
 			})
 		}
-	</script></head>
+	</script>
+</head>
 <body>
 	<div id="app">
-		<el-button>默认按钮</el-button>
+		<p>常用控件：</p>
+		<table is="tl-edit-table">
+			<tr>
+				<td>alertMsg(msg,fun)提示</td>
+				<td><el-button @click="alertMsg('这是一个alert',function(){window.alert('处理……')})">测试</el-button></td>
+			</tr>
+			<tr>
+				<td>confirmMsg(msg,okFun,cancelFun)提示</td>
+				<td><el-button @click="confirmMsg('这是一个confirm？',function(){window.alert('处理……')})">测试</el-button></td>
+			</tr>
+			<tr>
+				<td>文本框</td>
+				<td><el-input /></td>
+			</tr>
+			<tr>
+				<td>日期和时间选择</td>
+				<td>
+					<el-date-picker v-model="basicDatePickerValue"></el-date-picker>
+					<el-date-picker type="month" v-model="basicMonthPickerValue"></el-date-picker>
+					<el-date-picker type="datetime" v-model="basicDateTimePickerValue"></el-date-picker>
+					<el-date-picker type="year" v-model="basicYearPickerValue"></el-date-picker>
+				</td>
+			</tr>
+		</table>
 	</div>
 </body></html>

@@ -47,6 +47,14 @@
 </head>
 <body>
 	<div id="app">
+		<tl-search-bar>
+			<tl-search-item>测试1：<el-input placeholder="请输入内容"></el-input></tl-search-item>
+			<tl-search-item>测试2：<el-input placeholder="请输入内容"></el-input></tl-search-item>
+		</tl-search-bar>
+		<tl-tool-bar>
+			<tl-tool-button @click="window.alert()">导入</tl-tool-button>
+			<tl-tool-button>导出</tl-tool-button>
+		</tl-tool-bar>
 		<tl-op-bar>
 			<el-button type="primary">编辑</el-button>
 			<el-button type="danger">删除</el-button>

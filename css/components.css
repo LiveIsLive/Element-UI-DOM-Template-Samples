@@ -6,6 +6,7 @@
 
 #app
 {
+	font-size:14px;
 	padding:10px;
 	box-sizing:border-box;
 }
@@ -66,4 +67,9 @@
 .el-popover.tl-op-bar-popover
 {
 	margin-top:-30px
+}
+
+#app .el-input
+{
+	width:180px;
 }

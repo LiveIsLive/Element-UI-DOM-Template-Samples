@@ -60,9 +60,12 @@
 		<div>选中值：{{tempValues.checkTreeValue2}}</div>
 
 		<p>和下拉框整合</p>
-		<!--<tl-radio-tree-dropdown v-model="treeValue" :data="treeData" text-property="label" value-property="id"></tl-radio-tree-dropdown>
+		<tl-radio-tree-dropdown :data="treeData" text-property="label" value-property="id"></tl-radio-tree-dropdown>
 		<p>　</p>
-		<tl-check-tree-dropdown v-model="treeValue" :data="treeData" text-property="label" value-property="id"></tl-check-tree-dropdown>-->
+		<tl-check-tree-dropdown :data="treeData" text-property="label" value-property="id"></tl-check-tree-dropdown>
+		<div style="height:300px"></div>
+		<p>Cascader控件也能实现类似功能，可作另一种解决方案参考。</p>
+		<a target="_blank" href="https://element-cn.eleme.io/#/zh-CN/component/cascader">https://element-cn.eleme.io/#/zh-CN/component/cascader</a>
 	</div>
 </body>
 </html>

@@ -26,6 +26,22 @@ function confirmMsg(message, confirmCallback, cancelCallback, title)
 		})
 }
 
+var fullScreenLoading;
+function showLoading()
+{
+	fullScreenLoading = Vue.prototype.$loading({
+		lock: true,
+		//text: 'Loading',
+		//spinner: 'el-icon-loading',
+		background: 'rgba(255, 255, 255, 0.7)'
+	});
+}
+
+function closeLoading()
+{
+	fullScreenLoading.close();
+}
+
 _newControlId = 1;
 function getNewControlId()
 {
@@ -365,7 +381,14 @@ Vue.component('tl-date-picker', {
 			}
 		}
 	},
-	template: '<el-date-picker v-model="value" :picker-options="pickerOptions" style="width:135px" />'
+	methods:
+	{
+		change: function (v)
+		{
+			this.$emit('input', v);
+		}
+	},
+	template: '<el-date-picker v-model="value" :picker-options="pickerOptions" style="width:135px" @change="change" />'
 });
 
 Vue.component('tl-month-picker', {
@@ -428,9 +451,21 @@ Vue.component('tl-select', {
   </el-select>'
 });
 
+Vue.component('tl-pagination', {
+	props: ['total', "currentPage"],
+	template: '<el-pagination :current-page="currentPage" :page-sizes="[100, 200, 300, 400]" :page-size="20" layout="total, sizes, prev, pager, next, jumper" :total="total" style="text-align:right;margin-top:10px" />'
+});
+
 Vue.component('tl-input-number', {
 	props: ['value'],
-	template: '<el-input-number v-model="value" controls-position="right" />'
+	template: '<el-input-number v-model="value" controls-position="right" @change="change" />',
+	methods:
+	{
+		change: function (v)
+		{
+			this.$emit('input', v);
+		}
+	}
 });
 
 Vue.component('tl-list-table', {
@@ -446,27 +481,27 @@ Vue.component('tl-list-table', {
 });
 
 Vue.component('tl-edit-table', {
-	props:
-	{
-		equalWidth: Boolean
-	},
+	//props:
+	//{
+	//	equalWidth: Boolean
+	//},
 	mounted: function ()
 	{
 		var container = $(this.$el);
 		container.find(">table>tbody>tr:nth-child(odd),>table>tr:nth-child(odd)").addClass("el-table__row--striped");
 		container.find(">table>tbody>tr>td,table>tr>td").addClass("cell");
-		if (!this.equalWidth)
-			return;
+		//if (!this.equalWidth)
+		//	return;
 
-		var table = this.$el.children[0];
-		var group = $("<colgroup />").insertBefore(table.children[0]);
-		var columnCount = 0;
-		var cells = table.rows[0].cells;
-		for (var i = 0; i < cells.length; i++)
-			columnCount += cells[i].colSpan;
-		var width = 100 / columnCount + "%";
-		for (var i = 0; i < columnCount; i++)
-			group.append($("<col />").css("width", width));
+		//var table = this.$el.children[0];
+		//var group = $("<colgroup />").insertBefore(table.children[0]);
+		//var columnCount = 0;
+		//var cells = table.rows[0].cells;
+		//for (var i = 0; i < cells.length; i++)
+		//	columnCount += cells[i].colSpan;
+		//var width = 100 / columnCount + "%";
+		//for (var i = 0; i < columnCount; i++)
+		//	group.append($("<col />").css("width", width));
 	},
 	template: '<div class="el-table el-table--border el-table--striped el-table--enable-row-hover tl-edit-table">\
 	<table cellpadding="0" cellspacing="0" class="el-table__body" style="width: 100%;"><slot /></table>\
@@ -498,7 +533,7 @@ Vue.component('tl-menu-frame', {
 	},
 	template: '<el-container style="height:100%">\
 	<el-aside :width="asideWidth"><el-menu ref="popover" style="height:100%" @select="select"><slot /></el-menu></el-aside>\
-	<el-main><iframe style="width:100%;height:100%" frameborder="0" :src="url" /></el-main>\
+	<el-main style="padding:0"><iframe style="width:100%;height:100%" frameborder="0" :src="url" /></el-main>\
 </el-container>',
 	methods:
 	{
@@ -626,7 +661,7 @@ Vue.component('tl-search-item', {
 });
 
 Vue.component('tl-tool-bar', {
-	template: '<div style="margin-top:10px"><slot /></div>'
+	template: '<div style="margin-top:10px;margin-bottom:10px"><slot /></div>'
 });
 
 Vue.component('tl-tool-button', {

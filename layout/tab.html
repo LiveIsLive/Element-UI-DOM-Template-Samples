@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>菜单和iframe</title>
+	<link href="../plugins/vue/element/index.css" rel="stylesheet" />
+	<link href="../css/components.css" rel="stylesheet" />
+	<script src="../plugins/jQuery/jquery.min.js"></script>
+	<script src="../plugins/vue/vue.min.js"></script>
+	<script src="../plugins/vue/element/index.js"></script>
+	<script src="../js/components.js"></script>
+	<script>
+		window.onload = function ()
+		{
+			new Vue({el: '#app'})
+		}
+	</script>
+</head>
+<body>
+	<div id="app">
+		<tl-tab-frame>
+			<tl-link-tab-pane label="Google" url="http://g.cn"></tl-link-tab-pane>
+			<tl-link-tab-pane label="Bing" url="http://bing.com"></tl-link-tab-pane>
+			<tl-link-tab-pane label="Blank" url="about:blank"></tl-link-tab-pane>
+		</tl-tab-frame>
+	</div>
+</body>
+</html>

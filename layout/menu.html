@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>菜单和iframe</title>
+	<link href="../plugins/vue/element/index.css" rel="stylesheet" />
+	<link href="../css/components.css" rel="stylesheet" />
+	<script src="../plugins/jQuery/jquery.min.js"></script>
+	<script src="../plugins/vue/vue.min.js"></script>
+	<script src="../plugins/vue/element/index.js"></script>
+	<script src="../js/components.js"></script>
+	<script>
+		window.onload = function ()
+		{
+			new Vue({el: '#app'})
+		}
+	</script>
+</head>
+<body>
+	<div id="app">
+		<tl-menu-frame>
+			<el-submenu index="国内">
+				<template slot="title">
+					国内
+				</template>
+				<tl-link-menu-item url="http://baidu.com">百度</tl-link-menu-item>
+				<tl-link-menu-item url="http://so.com">360</tl-link-menu-item>
+			</el-submenu>
+			<tl-link-menu-item url="http://g.cn">Google</tl-link-menu-item>
+			<tl-link-menu-item url="http://bing.com">Bing</tl-link-menu-item>
+		</tl-menu-frame>
+	</div>
+</body>
+</html>

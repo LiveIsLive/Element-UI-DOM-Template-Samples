@@ -38,6 +38,11 @@
 	height:auto;
 }
 
+.tl-edit-table
+{
+	margin-bottom:10px;
+}
+
 .tl-edit-table > table > tbody > tr > td:nth-child(odd), .tl-edit-table > table > tr > td:nth-child(odd)
 {
 	text-align: right;

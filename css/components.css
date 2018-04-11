@@ -69,7 +69,7 @@
 	margin-top:-30px
 }
 
-#app .el-input
+#app [class=el-input]
 {
 	width:180px;
 }

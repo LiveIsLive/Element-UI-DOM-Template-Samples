@@ -327,6 +327,100 @@ Vue.component('tl-check-tree-dropdown', {
 	}
 });
 
+Vue.component('tl-date-picker', {
+	props: ['value',"disabledDate"],
+	data: function ()
+	{
+		return {
+			pickerOptions: {
+				disabledDate(time)
+				{
+					if (this.disabledDate)
+						return this.disabledDate(time);
+					return false;
+				},
+				shortcuts: [{
+					text: '今天',
+					onClick(picker)
+					{
+						picker.$emit('pick', new Date());
+					}
+				}, {
+					text: '昨天',
+					onClick(picker)
+					{
+						const date = new Date();
+						date.setTime(date.getTime() - 3600 * 1000 * 24);
+						picker.$emit('pick', date);
+					}
+				}, {
+					text: '一周前',
+					onClick(picker)
+					{
+						const date = new Date();
+						date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
+						picker.$emit('pick', date);
+					}
+				}]
+			}
+		}
+	},
+	template: '<el-date-picker v-model="value" :picker-options="pickerOptions" style="width:135px" />'
+});
+
+Vue.component('tl-month-picker', {
+	props: ['value'],
+	template: '<el-date-picker type="month" v-model="value"  style="width:115px" />'
+});
+
+Vue.component('tl-date-time-picker', {
+	props: ['value'],
+	template: '<el-date-picker type="datetime" v-model="value"  style="width:195px" />'
+});
+
+Vue.component('tl-year-picker', {
+	props: ['value'],
+	data: function ()
+	{
+		return {
+			pickerValue: null,
+			changedByUser: false
+		}
+	},
+	created: function ()
+	{
+		if (this.value)
+			this.pickerValue = new Date(this.value, null, null);
+		else this.value = null;
+	},
+	watch:
+	{
+		value: function (v)
+		{
+			if (this.changedByUser)
+			{
+				this.changedByUser = false;
+				return;
+			}
+			if (this.value)
+				this.pickerValue = new Date(this.value, null, null);
+			else this.value = null;
+		}
+	},
+	template: '<el-date-picker type="year" v-model="pickerValue" style="width:95px" @change="value_changed" />',
+	methods:
+	{
+		value_changed: function (v)
+		{
+			this.changedByUser = true;
+			if (v)
+				this.value = v.getFullYear();
+			else this.value = null;
+			this.$emit('input', this.value);
+		}
+	}
+});
+
 Vue.component('tl-list-table', {
 	mounted: function ()
 	{

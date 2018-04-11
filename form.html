@@ -29,7 +29,7 @@
 		<p>常用控件：</p>
 		<table is="tl-edit-table">
 			<tr>
-				<td>alertMsg(msg,fun)提示</td>
+				<td style="width:20%">alertMsg(msg,fun)提示</td>
 				<td><el-button @click="alertMsg('这是一个alert',function(){window.alert('处理……')})">测试</el-button></td>
 			</tr>
 			<tr>
@@ -43,10 +43,10 @@
 			<tr>
 				<td>日期和时间选择</td>
 				<td>
-					<el-date-picker v-model="basicDatePickerValue"></el-date-picker>
-					<el-date-picker type="month" v-model="basicMonthPickerValue"></el-date-picker>
-					<el-date-picker type="datetime" v-model="basicDateTimePickerValue"></el-date-picker>
-					<el-date-picker type="year" v-model="basicYearPickerValue"></el-date-picker>
+					<tl-date-picker v-model="basicDatePickerValue"></tl-date-picker>
+					<tl-month-picker></tl-month-picker>
+					<tl-date-time-picker></tl-date-time-picker>
+					<tl-year-picker></tl-year-picker>
 				</td>
 			</tr>
 		</table>

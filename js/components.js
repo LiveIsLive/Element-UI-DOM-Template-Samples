@@ -533,7 +533,7 @@ Vue.component('tl-menu-frame', {
 	},
 	template: '<el-container style="height:100%">\
 	<el-aside :width="asideWidth"><el-menu ref="popover" style="height:100%" @select="select"><slot /></el-menu></el-aside>\
-	<el-main style="padding:0"><iframe style="width:100%;height:100%" frameborder="0" :src="url" /></el-main>\
+	<el-main style="padding:0;overflow:hidden"><iframe style="width:100%;height:100%" frameborder="0" :src="url" /></el-main>\
 </el-container>',
 	methods:
 	{
@@ -571,7 +571,7 @@ Vue.component('tl-tab-frame', {
 	},
 	template: '<el-container style="height:100%"><slot />\
 	<el-header height="40px" style="padding:0;overflow:hidden"><el-tabs type="border-card" @tab-click="tab_click" v-model="url"><el-tab-pane v-for="pane in panes" :label="pane.label" :name="pane.name" /></el-tabs></el-header>\
-	<el-main style="padding:0">\
+	<el-main style="padding:0;height:100%">\
 		<div class="el-tabs el-tabs--top el-tabs--border-card" style="border-top:0;height:100%;box-sizing:border-box">\
 			<div class="el-tabs__content" style="padding:0;height:100%"><iframe style="width:100%;height:100%" frameborder="0" :src="url" /></div>\
 		</div>\
